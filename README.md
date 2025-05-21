@@ -1,2 +1,2 @@
-# data-structures-and-algorithms
-Data structures and algorithms
+# Data Structures and Algorithms
+Mostly problems and solutions
