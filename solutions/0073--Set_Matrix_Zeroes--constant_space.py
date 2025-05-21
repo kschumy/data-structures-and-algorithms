@@ -19,6 +19,8 @@
 #
 # https://leetcode.com/problems/set-matrix-zeroes/
 
+from typing import List
+
 class SetZeroesConstantSpace:
     def solve(self, matrix: List[List[int]]) -> None:
         rows_len = len(matrix)
