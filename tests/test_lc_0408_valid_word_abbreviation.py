@@ -1,7 +1,7 @@
 import pytest
 from typing import List
 
-from solutions.LC_0408_Valid_Word_Abbreviation import Solution
+from solutions.lc_0408_valid_word_abbreviation import Solution
 
 solver = Solution()
 

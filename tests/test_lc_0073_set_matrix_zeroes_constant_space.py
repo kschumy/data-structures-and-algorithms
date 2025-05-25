@@ -2,7 +2,7 @@ import pytest
 import random
 from typing import List
 
-from solutions.LC_0073_Set_Matrix_Zeroes_constant_space import SetZeroesConstantSpace
+from solutions.lc_0073_set_matrix_zeroes_constant_space import SetZeroesConstantSpace
 
 solver = SetZeroesConstantSpace()
 
