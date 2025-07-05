@@ -24,6 +24,9 @@
 # Constraints:
 #     1 <= arr.length <= 500
 #     1 <= arr[i] <= 500
+#
+# Daily Question: 07/04/2025
+# https://leetcode.com/problems/find-lucky-integer-in-an-array
 
 from typing import Counter, List
 
