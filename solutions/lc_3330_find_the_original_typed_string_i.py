@@ -33,9 +33,7 @@
 #   1 <= word.length <= 100
 #   word consists only of lowercase English letters.
 # 
-# Easy, 57.2% acceptance rate
 # Daily Question 07/01/2025
-#
 # https://leetcode.com/problems/find-the-original-typed-string-i/description
 
 class Solution:

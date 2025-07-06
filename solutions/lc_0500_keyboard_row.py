@@ -32,7 +32,7 @@
 #   • 1 <= words[i].length <= 100
 #   • words[i] consists of English letters (both lowercase and uppercase).
 #
-# https://leetcode.com/problems/keyboard-row/description/
+# https://leetcode.com/problems/keyboard-row
 
 from typing import List
 

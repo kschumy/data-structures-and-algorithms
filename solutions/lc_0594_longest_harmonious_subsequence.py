@@ -16,7 +16,8 @@
 # Input: nums = [1,2,3,4]
 # Output: 2
 # Explanation:
-# The longest harmonious subsequences are [1,2], [2,3], and [3,4], all of which have a length of 2.
+# The longest harmonious subsequences are [1,2], [2,3], and [3,4], all of which 
+# have a length of 2.
 #
 # Example 3:
 # Input: nums = [1,1,1,1]
@@ -25,12 +26,12 @@
 # No harmonic subsequence exists.
 #
 # Constraints:
-#   1 <= nums.length <= 2 * 104
-#   -109 <= nums[i] <= 109
-#
-# https://leetcode.com/problems/longest-harmonious-subsequence/
+#   1 <= nums.length <= 2 * 10^4
+#   -10^9 <= nums[i] <= 10^9
 #
 # Daily Question 06/29/2025
+# https://leetcode.com/problems/longest-harmonious-subsequence/
+
 from typing import Counter, List
 
 class Solution:

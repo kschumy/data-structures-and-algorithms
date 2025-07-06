@@ -1,4 +1,4 @@
-# 2099. Find Subsequence of Length K With the Largest Sum (easy)
+# 2099. Find Subsequence of Length K With the Largest Sum
 #
 # You are given an integer array nums and an integer k. You want to find a 
 # subsequence of nums of length k that has the largest sum.
@@ -9,7 +9,6 @@
 # some or no elements without changing the order of the remaining elements.
 #
 # Example 1:
-#
 # Input: nums = [2,1,3,3], k = 2
 # Output: [3,3]
 # Explanation:
@@ -33,8 +32,9 @@
 #   -105 <= nums[i] <= 105
 #   1 <= k <= nums.length
 #
-# https://leetcode.com/problems/find-subsequence-of-length-k-with-the-largest-sum/
 # Daily Question 06/28/2025
+# https://leetcode.com/problems/find-subsequence-of-length-k-with-the-largest-sum/
+
 import heapq
 from typing import List
 

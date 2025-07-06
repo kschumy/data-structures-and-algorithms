@@ -1,6 +1,4 @@
-
-
-# 408. Valid Word Abbreviation  (easy)
+# 408. Valid Word Abbreviation
 #
 # A string can be abbreviated by replacing any number of non-adjacent, non-empty
 # substrings with their lengths. The lengths should not have leading zeros.
@@ -40,6 +38,8 @@
 #     1 <= abbr.length <= 10
 #     abbr consists of lowercase English letters and digits.
 #     All the integers in abbr will fit in a 32-bit integer.
+#
+# https://leetcode.com/problems/valid-word-abbreviation
 
 class Solution:
     def validWordAbbreviation(self, word: str, abbr: str) -> bool:

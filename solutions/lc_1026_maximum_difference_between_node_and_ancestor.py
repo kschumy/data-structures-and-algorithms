@@ -1,4 +1,4 @@
-# 1026. Maximum Difference Between Node and Ancestor   (medium)
+# 1026. Maximum Difference Between Node and Ancestor
 #
 # Given the root of a binary tree, find the maximum value v for which there exist
 # different nodes a and b where v = |a.val - b.val| and a is an ancestor of b.
@@ -21,9 +21,10 @@
 #
 # Constraints:
 #     The number of nodes in the tree is in the range [2, 5000].
-#     0 <= Node.val <= 105
+#     0 <= Node.val <= 10^5
 #
-# https://leetcode.com/problems/maximum-difference-between-node-and-ancestor/description/
+# Difficulty: Medium
+# https://leetcode.com/problems/maximum-difference-between-node-and-ancestor
 
 from typing import Optional
 from auxiliary_data_structures.tree_node import TreeNode
