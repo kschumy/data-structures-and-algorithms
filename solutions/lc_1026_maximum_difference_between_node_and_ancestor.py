@@ -31,7 +31,10 @@ from auxiliary_data_structures.tree_node import TreeNode
 
 class Solution:
     def maxAncestorDiff(self, root: Optional[TreeNode]) -> int:
-        # (current node, LOWEST value in ancester nodes, HIGHEST value in ancester nodes)
+        # Tuple elements at each index:
+        #   [0] current node
+        #   [1] LOWEST value in ancestor nodes
+        #   [2] HIGHEST value in ancestor nodes
         stack = [(root, root.val, root.val)]
         biggest_diff = 0
         

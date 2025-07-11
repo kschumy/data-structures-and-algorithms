@@ -33,10 +33,7 @@
 #
 # Difficulty: Medium
 # https://leetcode.com/problems/populating-next-right-pointers-in-each-node/
-"""
-# Definition for a Node.
 
-"""
 from collections import deque
 
 from auxiliary_data_structures.node import Node

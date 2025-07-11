@@ -30,7 +30,7 @@
 #   • 1 <= s.length <= 10^5
 #   • s[i] is either '(' , ')', or lowercase English letter.
 #
-# Difficuly: Medium
+# Difficulty: Medium
 # https://leetcode.com/problems/minimum-remove-to-make-valid-parentheses/
 
 class Solution:

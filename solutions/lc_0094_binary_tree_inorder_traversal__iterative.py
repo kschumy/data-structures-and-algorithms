@@ -1,4 +1,4 @@
-# 94. Binary Tree Inorder Traversal (Interative Solution)
+# 94. Binary Tree Inorder Traversal (Iterative Solution)
 #
 # Given the root of a binary tree, return the inorder traversal of its nodes' 
 # values.
