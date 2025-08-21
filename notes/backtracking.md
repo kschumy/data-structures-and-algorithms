@@ -98,7 +98,7 @@ Key insight: Mark visited cells and unmark when backtracking
 
 ### 1. Generate All Permutations
 
-**Problem**: Generate all permutations of a list of numbers.
+**Problem**: Generate all permutations of a list of numbers -- [Leetcode #46](https://leetcode.com/problems/permutations)
 
 #### Approach #1
 ```python
@@ -152,7 +152,7 @@ return result
 
 ##### Example #1
 
-**Problem**: Generate all k-length combinations from n numbers.
+**Problem**: Generate all k-length combinations from n numbers. -- [Leetcode #77](https://leetcode.com/problems/combinations/)
 
 ```python
 def combine(n, k):
@@ -197,7 +197,7 @@ def subsets(nums):
 
 ### 3. N-Queens Problem
 
-**Problem**: Place N queens on an N×N chessboard so they don't attack each other.
+**Problem**: Place N queens on an N×N chessboard so they don't attack each other -- [Leetcode #51](https://leetcode.com/problems/n-queens/description/)
 
 #### Approach #1
 
@@ -295,7 +295,7 @@ def solveNQueens(n):
 
 ### 4. Word Search in Grid
 
-**Problem**: Find if a word exists in a 2D grid of letters.
+**Problem**: Find if a word exists in a 2D grid of letters. -- [Leetcode #79](https://leetcode.com/problems/word-search/description/)
 
 ```python
 def exist(board, word):
@@ -333,6 +333,16 @@ def exist(board, word):
                 return True
     
     return False
+
+# Example usage
+board = [
+  ["A","B","C","E"],
+  ["S","F","C","S"],
+  ["A","D","E","E"]
+]
+word = "ABCCED"
+print(exist(board, word))
+# Output: True
 ```
 
 ---
@@ -425,3 +435,32 @@ Always clearly define when you have a complete solution.
 
 ### 4. Infinite Recursion
 Make sure your recursive calls are making progress toward the base case.
+
+## Practice Problems
+
+#### Beginner Level
+
+* Letter Case Permutation: Transform each letter individually to be lowercase or uppercase to create another string -- [LeetCode #784](https://leetcode.com/problems/letter-case-permutation/description/)
+* Generate Parentheses: Generate all combinations of well-formed parentheses -- [LeetCode #22](https://leetcode.com/problems/generate-parentheses/description/)
+* Subsets: Generate all possible subsets of a set -- [LeetCode #78](https://leetcode.com/problems/subsets/description/)
+* Combination Sum: Find all unique combinations where the candidate numbers sum to target -- [LeetCode #39](https://leetcode.com/problems/combination-sum), [Leetcode #40](https://leetcode.com/problems/combination-sum-ii/), and [Leetcode #216](https://leetcode.com/problems/combination-sum-iii)
+
+#### Intermediate Level
+
+* Palindrome Partitioning: Partition a string such that every substring is a palindrome -- [LeetCode #131](https://leetcode.com/problems/palindrome-partitioning/description/)
+* Restore IP Addresses: Restore all possible valid IP address from a string containing only digits -- [LeetCode #93](https://leetcode.com/problems/restore-ip-addresses/description/)
+* Word Search II: Find all words from a dictionary that exist in a 2D board -- [LeetCode #212](https://leetcode.com/problems/word-search-ii/description/)
+* Sudoku Solver: Write a program to solve a Sudoku puzzle -- [LeetCode #37](https://leetcode.com/problems/sudoku-solver)
+
+#### Advanced Level
+
+* N-Queens II: Count the number of distinct solutions to the n-queens puzzle -- [LeetCode #51](https://leetcode.com/problems/n-queens/) and [Leetcode #52](https://leetcode.com/problems/n-queens-ii/description/)
+* Expression Add Operators: Add binary operators between digits to get target value -- [LeetCode #282](https://leetcode.com/problems/expression-add-operators/description/)
+* Remove Invalid Parentheses: Remove minimum parentheses to make the input string valid -- [LeetCode #301](https://leetcode.com/problems/remove-invalid-parentheses/description/)
+* Cryptarithmetic Puzzles: Verbal arithmetic puzzles (SEND + MORE = MONEY) [Leetcode #1307](https://leetcode.com/problems/verbal-arithmetic-puzzle/description/)
+
+
+#### LeetCode Backtracking Collections
+* LeetCode Backtracking Problem List: https://leetcode.com/problem-list/backtracking/
+* LeetCode Recursion II (Backtracking): https://leetcode.com/explore/learn/card/recursion-ii/472/backtracking/2796/
+
