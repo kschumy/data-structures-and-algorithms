@@ -41,8 +41,7 @@ def backtrack(partial_solution, remaining_choices):
     partial_solution.append(choice)
       
     # Pruning: skip if this choice makes solution invalid
-    if not is_promising(partial_solution):
-      partial_solution.pop()  # backtrack
+    if not is_promising(partial_solution, choice):
       continue
     
     # Recursively explore with this choice
@@ -130,12 +129,12 @@ print(permute([1, 2, 3]))
 #### Approach #2
 ```python
 def permute(nums):
-	res = []
+	result= []
 	used = [False]*len(nums)
 
 	def backtrack(path):
 		if len(path) == len(nums):
-			res.append(path[:])
+			result.append(path[:])
 			return
 		for i in range(len(nums)):
 			if used[i]:
@@ -146,10 +145,12 @@ def permute(nums):
 			path.pop()
 			used[i] = False
 backtrack([])
-return res
+return result
 ```
 
 ### 2. Generate All Combinations
+
+##### Example #1
 
 **Problem**: Generate all k-length combinations from n numbers.
 
@@ -165,14 +166,9 @@ def combine(n, k):
         
         # Try numbers from start to n
         for i in range(start, n + 1):
-            # Make choice
-            current_combo.append(i)
-            
-            # Recurse with next starting position
-            backtrack(i + 1, current_combo)
-            
-            # Backtrack
-            current_combo.pop()
+            current_combo.append(i) # Make choice
+            backtrack(i + 1, current_combo) # Recurse with next starting position
+            current_combo.pop() # Backtrack
     
     backtrack(1, [])
     return result
@@ -182,9 +178,29 @@ print(combine(4, 2))
 # Output: [[1,2], [1,3], [1,4], [2,3], [2,4], [3,4]]
 ```
 
+##### Example #2
+
+**Problem**: Generate all subsets of [1,2,3]
+
+```
+def subsets(nums):
+    result = []
+    def backtrack(start, path):
+        result.append(path[:])  # record current subset
+        for i in range(start, len(nums)):
+            path.append(nums[i])     # choose
+            backtrack(i+1, path)     # explore
+            path.pop()               # un-choose
+    backtrack(0, [])
+    return result
+
+```
+
 ### 3. N-Queens Problem
 
 **Problem**: Place N queens on an N×N chessboard so they don't attack each other.
+
+#### Approach #1
 
 ```python
 def solve_n_queens(n):
@@ -224,7 +240,7 @@ def solve_n_queens(n):
         # Try placing queen in each column of current row
         for col in range(n):
             if is_safe(row, col):
-                # Make choice
+				# Make choice
                 board[row] = board[row][:col] + 'Q' + board[row][col+1:]
                 
                 # Recurse
@@ -235,6 +251,47 @@ def solve_n_queens(n):
     
     backtrack(0)
     return result
+```
+
+#### Approach #2
+
+```
+def solveNQueens(n):
+    result = []
+    cols, diag1, diag2 = set(), set(), set()  # track used columns & diagonals
+    
+    def backtrack(row, path):
+        # Base case: all queens placed
+        if row == n:
+            result.append(["".join(r) for r in path])  # convert board to strings
+            return
+        
+        # Try placing a queen in each column of current row
+        for col in range(n):
+            # Skip if column or diagonal already occupied
+            if col in cols or (row-col) in diag1 or (row+col) in diag2:
+                continue
+            
+            # Place queen
+            row_str = ["." for _ in range(n)]
+            row_str[col] = "Q"
+            path.append(row_str)
+            cols.add(col)
+			diag1.add(row-col)
+			diag2.add(row+col)
+            
+            # Recurse to next row
+            backtrack(row+1, path)
+            
+            # Backtrack: remove queen and free constraints
+            path.pop()
+            cols.remove(col)
+			diag1.remove(row-col)
+			diag2.remove(row+col)
+    
+    backtrack(0, [])
+    return result
+
 ```
 
 ### 4. Word Search in Grid
@@ -251,8 +308,9 @@ def exist(board, word):
             return True
         
         # Out of bounds or wrong character
-        if (r < 0 or r >= rows or c < 0 or c >= cols or board[r][c] != word[index]):
-            return True
+        if (r < 0 or r >= rows or c < 0 or c >= cols or 
+            board[r][c] != word[index]):
+            return False
         
         # Mark current cell as visited
         temp = board[r][c]
@@ -329,26 +387,28 @@ Try values that are more likely to lead to solutions first.
 
 ### 1. Forgetting to Backtrack
 ```python
-# WRONG - forgot to remove choice
+# WRONG - forgot to remove choice AND forgot to copy
 def wrong_backtrack(current, remaining):
     if not remaining:
-        result.append(current)
+        result.append(current)  # BUG 1: No .copy() - will store reference
         return
     
     for choice in remaining:
         current.append(choice)  # Make choice
-        wrong_backtrack(current, remaining - {choice})
-        # Missing: current.pop()  # Should backtrack here!
+        new_remaining = [x for x in remaining if x != choice]
+        wrong_backtrack(current, new_remaining)
+        # BUG 2: Missing current.pop() - forgot to backtrack!
 
 # CORRECT
 def correct_backtrack(current, remaining):
     if not remaining:
-        result.append(current.copy())  # Also note the .copy()!
+        result.append(current.copy())
         return
     
     for choice in remaining:
         current.append(choice)
-        correct_backtrack(current, remaining - {choice})
+        new_remaining = [x for x in remaining if x != choice]
+        correct_backtrack(current, new_remaining)
         current.pop()  # Backtrack
 ```
 
