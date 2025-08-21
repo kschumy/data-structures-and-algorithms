@@ -70,31 +70,305 @@ def backtrack(path, options):
 ## Commmon Problem Types
 
 ### 1. Permutations
-Generate all possible arrangements of elements.
-
-Example: All permutations of [1,2,3]
+Generate all possible arrangements of elements.  
+Example: All permutations of [1,2,3]  
 Key insight: Each position gets filled with remaining choices
 
 ### 2. Combinations
-Choose a subset of elements where order doesn't matter.
-
+Choose a subset of elements where order doesn't matter.  
 Example: All 2-element combinations from [1,2,3,4]
 Key insight: Avoid duplicates by maintaining order
 
 ### 3. Subsets
-Generate all possible subsets (power set).
-
+Generate all possible subsets (power set).  
 Example: All subsets of [1,2,3]
 Key insight: For each element, choose to include it or not
 
 ### 4. Constraint Satisfaction
-Find arrangements that satisfy given constraints.
-
+Find arrangements that satisfy given constraints.  
 Example: N-Queens, Sudoku  
 Key insight: Check constraints before proceeding
 
 ### 5. Path Finding
-Find paths through a grid or graph.
-
+Find paths through a grid or graph.  
 Example: Word search, maze solving  
 Key insight: Mark visited cells and unmark when backtracking
+
+
+## Classic Problems with Solutions
+
+### 1. Generate All Permutations
+
+**Problem**: Generate all permutations of a list of numbers.
+
+#### Approach #1
+```python
+def permute(nums):
+    result = []
+    
+		def backtrack(current_perm, remaining):
+				# Base case: no more numbers to place
+        if not remaining:
+            result.append(current_perm.copy())
+            return
+        
+        # Try each remaining number in the current position
+        for i, num in enumerate(remaining):
+            # Make choice
+            current_perm.append(num)
+            new_remaining = remaining[:i] + remaining[i+1:]
+            
+            # Recurse
+            backtrack(current_perm, new_remaining)
+            
+            # Backtrack
+            current_perm.pop()
+    
+    backtrack([], nums)
+    return result
+
+# Example usage
+print(permute([1, 2, 3]))
+# Output: [[1,2,3], [1,3,2], [2,1,3], [2,3,1], [3,1,2], [3,2,1]]
+```
+
+#### Approach #2
+```python
+def permute(nums):
+    res = []
+    used = [False]*len(nums)
+
+		def backtrack(path):
+        if len(path) == len(nums):
+            res.append(path[:])
+            return
+        for i in range(len(nums)):
+						if used[i]:
+							continue
+            used[i] = True
+            path.append(nums[i])
+            backtrack(path)
+            path.pop()
+            used[i] = False
+    backtrack([])
+    return res
+```
+
+### 2. Generate All Combinations
+
+**Problem**: Generate all k-length combinations from n numbers.
+
+```python
+def combine(n, k):
+    result = []
+    
+    def backtrack(start, current_combo):
+        # Base case: we have k numbers
+        if len(current_combo) == k:
+            result.append(current_combo.copy())
+            return
+        
+        # Try numbers from start to n
+        for i in range(start, n + 1):
+            # Make choice
+            current_combo.append(i)
+            
+            # Recurse with next starting position
+            backtrack(i + 1, current_combo)
+            
+            # Backtrack
+            current_combo.pop()
+    
+    backtrack(1, [])
+    return result
+
+# Example usage
+print(combine(4, 2))
+# Output: [[1,2], [1,3], [1,4], [2,3], [2,4], [3,4]]
+```
+
+### 3. N-Queens Problem
+
+**Problem**: Place N queens on an N×N chessboard so they don't attack each other.
+
+```python
+def solve_n_queens(n):
+    result = []
+    board = ['.' * n for _ in range(n)]
+    
+    def is_safe(row, col):
+        # Check column
+        for i in range(row):
+            if board[i][col] == 'Q':
+                return False
+        
+        # Check diagonal (top-left to bottom-right)
+        i, j = row - 1, col - 1
+        while i >= 0 and j >= 0:
+            if board[i][j] == 'Q':
+                return False
+            i -= 1
+            j -= 1
+        
+        # Check diagonal (top-right to bottom-left)
+        i, j = row - 1, col + 1
+        while i >= 0 and j < n:
+            if board[i][j] == 'Q':
+                return False
+            i -= 1
+            j += 1
+        
+        return True
+    
+    def backtrack(row):
+        # Base case: placed all queens
+        if row == n:
+            result.append([row[:] for row in board])
+            return
+        
+        # Try placing queen in each column of current row
+        for col in range(n):
+            if is_safe(row, col):
+                # Make choice
+                board[row] = board[row][:col] + 'Q' + board[row][col+1:]
+                
+                # Recurse
+                backtrack(row + 1)
+                
+                # Backtrack
+                board[row] = board[row][:col] + '.' + board[row][col+1:]
+    
+    backtrack(0)
+    return result
+```
+
+### 4. Word Search in Grid
+
+**Problem**: Find if a word exists in a 2D grid of letters.
+
+```python
+def exist(board, word):
+    rows, cols = len(board), len(board[0])
+    
+    def backtrack(r, c, index):
+        # Base case: found the word
+        if index == len(word):
+            return True
+        
+        # Out of bounds or wrong character
+        if (r < 0 or r >= rows or c < 0 or c >= cols or 
+            board[r][c] != word[index]):
+            return True
+        
+        # Mark current cell as visited
+        temp = board[r][c]
+        board[r][c] = '#'
+        
+        # Explore all 4 directions
+        found = (backtrack(r+1, c, index+1) or
+                backtrack(r-1, c, index+1) or
+                backtrack(r, c+1, index+1) or
+                backtrack(r, c-1, index+1))
+        
+        # Backtrack: restore original character
+        board[r][c] = temp
+        
+        return found
+    
+    # Try starting from each cell
+    for r in range(rows):
+        for c in range(cols):
+            if backtrack(r, c, 0):
+                return True
+    
+    return False
+```
+
+---
+
+## Optimization Techniques
+
+### 1. Early Pruning
+Stop exploring a branch as soon as you know it can't lead to a solution.
+
+```python
+# Instead of this:
+def bad_backtrack(partial_solution):
+    if len(partial_solution) == target_length:
+        if is_valid(partial_solution):
+            solutions.append(partial_solution.copy())
+        return
+    
+    for choice in choices:
+        partial_solution.append(choice)
+        bad_backtrack(partial_solution)
+        partial_solution.pop()
+
+# Do this:
+def good_backtrack(partial_solution):
+    # Early termination
+    if not is_promising(partial_solution):
+        return
+    
+    if len(partial_solution) == target_length:
+        solutions.append(partial_solution.copy())
+        return
+    
+    for choice in choices:
+        partial_solution.append(choice)
+        good_backtrack(partial_solution)
+        partial_solution.pop()
+```
+
+### 2. Constraint Propagation
+Use problem-specific knowledge to reduce the search space.
+
+### 3. Variable Ordering
+Choose variables/positions in an order that leads to earlier pruning.
+
+### 4. Value Ordering
+Try values that are more likely to lead to solutions first.
+
+---
+
+## Common Pitfalls
+
+### 1. Forgetting to Backtrack
+```python
+# WRONG - forgot to remove choice
+def wrong_backtrack(current, remaining):
+    if not remaining:
+        result.append(current)
+        return
+    
+    for choice in remaining:
+        current.append(choice)  # Make choice
+        wrong_backtrack(current, remaining - {choice})
+        # Missing: current.pop()  # Should backtrack here!
+
+# CORRECT
+def correct_backtrack(current, remaining):
+    if not remaining:
+        result.append(current.copy())  # Also note the .copy()!
+        return
+    
+    for choice in remaining:
+        current.append(choice)
+        correct_backtrack(current, remaining - {choice})
+        current.pop()  # Backtrack
+```
+
+### 2. Modifying Shared State Incorrectly
+```python
+# WRONG - modifying the same list reference
+result.append(current)
+
+# CORRECT - create a copy
+result.append(current.copy())
+```
+
+### 3. Not Handling Base Cases Properly
+Always clearly define when you have a complete solution.
+
+### 4. Infinite Recursion
+Make sure your recursive calls are making progress toward the base case.
