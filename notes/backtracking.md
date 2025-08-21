@@ -104,28 +104,23 @@ Key insight: Mark visited cells and unmark when backtracking
 #### Approach #1
 ```python
 def permute(nums):
-    result = []
+	result = []
     
-		def backtrack(current_perm, remaining):
-				# Base case: no more numbers to place
-        if not remaining:
-            result.append(current_perm.copy())
-            return
-        
-        # Try each remaining number in the current position
-        for i, num in enumerate(remaining):
-            # Make choice
-            current_perm.append(num)
-            new_remaining = remaining[:i] + remaining[i+1:]
-            
-            # Recurse
-            backtrack(current_perm, new_remaining)
-            
-            # Backtrack
-            current_perm.pop()
-    
-    backtrack([], nums)
-    return result
+	def backtrack(current_perm, remaining):
+		# Base case: no more numbers to place
+		if not remaining:
+			result.append(current_perm.copy())
+			return
+			
+		# Try each remaining number in the current position
+		for i, num in enumerate(remaining):
+			current_perm.append(num) # Make choice
+			new_remaining = remaining[:i] + remaining[i+1:]
+			backtrack(current_perm, new_remaining) # Recursion
+			current_perm.pop() # Backtrack
+	
+	backtrack([], nums)
+	return result
 
 # Example usage
 print(permute([1, 2, 3]))
@@ -135,23 +130,23 @@ print(permute([1, 2, 3]))
 #### Approach #2
 ```python
 def permute(nums):
-    res = []
-    used = [False]*len(nums)
+	res = []
+	used = [False]*len(nums)
 
-		def backtrack(path):
-        if len(path) == len(nums):
-            res.append(path[:])
-            return
-        for i in range(len(nums)):
-						if used[i]:
-							continue
-            used[i] = True
-            path.append(nums[i])
-            backtrack(path)
-            path.pop()
-            used[i] = False
-    backtrack([])
-    return res
+	def backtrack(path):
+		if len(path) == len(nums):
+			res.append(path[:])
+			return
+		for i in range(len(nums)):
+			if used[i]:
+				continue
+			used[i] = True
+			path.append(nums[i])
+			backtrack(path)
+			path.pop()
+			used[i] = False
+backtrack([])
+return res
 ```
 
 ### 2. Generate All Combinations
@@ -256,8 +251,7 @@ def exist(board, word):
             return True
         
         # Out of bounds or wrong character
-        if (r < 0 or r >= rows or c < 0 or c >= cols or 
-            board[r][c] != word[index]):
+        if (r < 0 or r >= rows or c < 0 or c >= cols or board[r][c] != word[index]):
             return True
         
         # Mark current cell as visited
