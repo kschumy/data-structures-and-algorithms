@@ -182,7 +182,7 @@ print(combine(4, 2))
 
 **Problem**: Generate all subsets of [1,2,3]
 
-```
+```python
 def subsets(nums):
     result = []
     def backtrack(start, path):
@@ -193,7 +193,6 @@ def subsets(nums):
             path.pop()               # un-choose
     backtrack(0, [])
     return result
-
 ```
 
 ### 3. N-Queens Problem
@@ -255,7 +254,7 @@ def solve_n_queens(n):
 
 #### Approach #2
 
-```
+```python
 def solveNQueens(n):
     result = []
     cols, diag1, diag2 = set(), set(), set()  # track used columns & diagonals
