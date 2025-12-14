@@ -7,7 +7,7 @@ if [ $# -eq 0 ]; then
     exit 1
 fi
 
-input_string="$1"
+input_string="$(echo "$*" | xargs)"
 
 digits=$(echo "$input_string" | grep -o '^[0-9]\{1,4\}')
 if [ -z "$digits" ]; then
