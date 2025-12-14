@@ -1,5 +1,7 @@
 # https://leetcode.com/problems/absolute-difference-between-maximum-and-minimum-k-elements/description/
 
+from typing import List
+
 class Solution:
     def absDifference(self, nums: List[int], k: int) -> int:
         nums.sort()
